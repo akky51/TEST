@@ -66,14 +66,10 @@ contract.methods
             button.appendChild(p);
           }
           //実験用/質問の回答をコメントできるテキストボックスを作成
-          var p = document.createElement("p");
-          var text = document.createElement("text");
-          text.type = "text";
-          text.id = "text" + idx;
-          text.textContent = "回答を入力してください";
-          p.appendChild(text);
-          text.appendChild(p);
-
+         var p = document.createElement("p");
+          var input = document.createElement("input");
+          input.setAttribute('type', 'text');
+          p.appendChild(input);
 
           // 評価を選択するセレクトフォームを作成する
           var p = document.createElement("p");
