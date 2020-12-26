@@ -18,15 +18,15 @@ contract.methods
 
     // 取引を進めるボタンのIDとボタンに表示するテキスト
     var buttonId = [
-      "receiveRequest",
-      "setFinish",
-      "finishRequest",
-      "reputate1",
-      "reputate2",
+      "provRegistration",
+      "answered",
+      "checked",
+      "questionerReputation",
+      "respondentReputation",
     ];
     var buttonText = [
-      "この質問に回答する",
-      "回答完了",
+      "請負",
+      "回答",
       "回答確認",
       "質問者を評価",
       "回答者を評価",
@@ -157,61 +157,69 @@ function showImage(idx) {
 // 商品情報を表示する
 function showDescription(idx) {
   itemKeyList = [
-    "質問題名",
+    "質問名",
     "報酬(wei)",
     "質問内容",
     "状況",
     "質問者",
     "質問者のアドレス",
-    "回答者のアドレス",
-    "回答"
+    "回答者",
+    "回答者のアドレス"
+    
   ];
-  itemIdxList = [3, 5, 4, 11, 2, 0, 1, 12]; // keyに対応するインデックス
+  itemIdxList = [4, 7, 5, 6, 2, 0, 3, 1]; // keyに対応するインデックス
 
   contract.methods
-    .requestInfos(idx)
+    .questionInfos1(idx)
     .call()
-    .then(function (requestInfo) {
+    .then(function (questionInfos1) {
       //依頼番号表示
       var elem = document.createElement("p");
       elem.textContent = " 質問番号: " + (idx + 1);
       document.getElementById("description" + idx).appendChild(elem);
+      
       for (var i = 0; i < itemIdxList.length; i++) {
         var elem = document.createElement("p");
-        // 依頼状況のみ，true⇒募集中止，false⇒募集中に表示を変更する
+        //回答の表示
         if (i == 3) {
-          if (requestInfo[itemIdxList[i]] == true) {
-            elem.textContent = itemKeyList[i] + " : 募集終了";
-          } else {
-            elem.textContent = itemKeyList[i] + " : 募集中";
-          }
-        } else if (i == 12) {
-          if (requestInfo[itemIdxList[i]] == "") {
+          if (questionInfos1[itemIdxList[i]] == "") {
             elem.textContent = itemKeyList[i] + " : 未回答";
           } else {
             elem.textContent = itemKeyList[i] + " : "　+/*ここにテキストボックスの値を追加*/0;
           }
         } else {
           elem.textContent =
-            itemKeyList[i] + " : " + requestInfo[itemIdxList[i]];
+            itemKeyList[i] + " : " + questionInfos1[itemIdxList[i]];
         }
         document.getElementById("description" + idx).appendChild(elem);
+      }
+    },
+    //編集中
+    contract.methods
+    .questionInfos2(idx)
+    .call()
+    .then(function (questionInfos2) {
+    // 依頼状況のみ，true⇒募集中止，false⇒募集中に表示を変更する
+    if (questionInfos2[5] == true) {
+        elem.textContent = itemKeyList[i] + " : 募集終了";
+      } else {
+        elem.textContent = itemKeyList[i] + " : 募集中";
       }
     });
 }
 
 // 取引の状態を表示する
 function showState(idx) {
-  stateKeyList = ["請負", "実行", "確認（送金）", "依頼者評価", "請負人評価"];
-  stateIdxList = [6, 7, 8, 9, 10]; // keyに対応するインデックス
+  stateKeyList = ["請負", "回答", "確認（送金）", "質問者評価", "回答者評価"];
+  stateIdxList = [0, 1, 2, 3, 4]; // keyに対応するインデックス
 
   contract.methods
-    .requestInfos(idx)
+    .questionInfos1(idx)
     .call()
-    .then(function (requestInfo) {
+    .then(function (questionInfos1) {
       for (var i = 0; i < stateIdxList.length; i++) {
         var elem = document.createElement("p");
-        if (requestInfo[stateIdxList[i]] == true) {
+        if (questionInfos1[stateIdxList[i]] == true) {
           elem.textContent = stateKeyList[i] + " : 完了";
         } else {
           elem.textContent = stateKeyList[i] + " : 未完了";
@@ -225,57 +233,57 @@ function showState(idx) {
 function setButton(idx) {
   var reward;
   contract.methods
-    .requestInfos(idx)
+    .questionInfos1(idx)
     .call()
-    .then(function (requestInfo) {
-      reward = requestInfo[5]; // 商品価格を取得する
+    .then(function (questionInfos1) {
+      reward = questionInfos1[5]; // 商品価格を取得する
     })
     .then(function () {
       document
-        .getElementById("receiveRequest" + idx)
-        .setAttribute("onclick", "receiveRequest(" + idx + ");");
+        .getElementById("provRegistration" + idx)
+        .setAttribute("onclick", "provRegistration(" + idx + ");");
       document
-        .getElementById("setFinish" + idx)
-        .setAttribute("onclick", "setFinish(" + idx + ");");
+        .getElementById("answered" + idx)
+        .setAttribute("onclick", "answered(" + idx + ");");
       document
-        .getElementById("finishRequest" + idx)
-        .setAttribute("onclick", "finishRequest(" + idx + "," + reward + ");");
+        .getElementById("checked" + idx)
+        .setAttribute("onclick", "checked(" + idx + "," + reward + ");");
       document
-        .getElementById("reputate1" + idx)
-        .setAttribute("onclick", "reputate1(" + idx + ");");
+        .getElementById("questionerReputation" + idx)
+        .setAttribute("onclick", "questionerReputation(" + idx + ");");
       document
-        .getElementById("reputate2" + idx)
-        .setAttribute("onclick", "reputate2(" + idx + ");");
+        .getElementById("respondentReputation" + idx)
+        .setAttribute("onclick", "respondentReputation(" + idx + ");");
     });
 }
 
 // 依頼請負を行う関数
-function receiveRequest(idx) {
-  return contract.methods.receiveRequest(idx).send({ from: coinbase });
+function provRegistration(idx) {
+  return contract.methods.provRegistration(idx).send({ from: coinbase });
 }
 
 // 依頼実行を連絡する関数
-function setFinish(idx) {
-  return contract.methods.setFinish(idx).send({ from: coinbase });
+function answered(idx) {
+  return contract.methods.answered(idx).send({ from: coinbase });
 }
 
 // 実行確認を連絡する関数
-function finishRequest(idx, reward) {
+function checked(idx, reward) {
   return contract.methods
-    .finishRequest(idx)
+    .checked(idx)
     .send({ from: coinbase, value: reward });
 }
 
 // 依頼者を評価する関数
-function reputate1(idx) {
+function questionerReputation(idx) {
   var buyerValue = document.getElementById("value" + idx).value;
 
-  return contract.methods.reputate1(idx, buyerValue).send({ from: coinbase });
+  return contract.methods.questionerReputation(idx, buyerValue).send({ from: coinbase });
 }
 
 // 請負人を評価する関数
-function reputate2(idx) {
+function respondentReputation(idx) {
   var sellerValue = document.getElementById("value" + idx).value;
 
-  return contract.methods.reputate2(idx, sellerValue).send({ from: coinbase });
+  return contract.methods.respondentReputation(idx, sellerValue).send({ from: coinbase });
 }
