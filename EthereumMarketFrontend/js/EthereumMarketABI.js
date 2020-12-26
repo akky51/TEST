@@ -5,9 +5,27 @@ abi = [
 			{
 				"name": "_numItems",
 				"type": "uint256"
+			},
+			{
+				"name": "_comment",
+				"type": "string"
 			}
 		],
-		"name": "finishRequest",
+		"name": "answer",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_numItems",
+				"type": "uint256"
+			}
+		],
+		"name": "checked",
 		"outputs": [],
 		"payable": true,
 		"stateMutability": "payable",
@@ -96,10 +114,40 @@ abi = [
 				"type": "uint256"
 			}
 		],
-		"name": "receiveRequest",
+		"name": "provRegister",
 		"outputs": [],
 		"payable": true,
 		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"name": "_description",
+				"type": "string"
+			},
+			{
+				"name": "_reward",
+				"type": "uint256"
+			},
+			{
+				"name": "_googleDocID",
+				"type": "string"
+			},
+			{
+				"name": "_ipfsHash",
+				"type": "string"
+			}
+		],
+		"name": "question",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -132,7 +180,7 @@ abi = [
 				"type": "int256"
 			}
 		],
-		"name": "reputate1",
+		"name": "reputateQuestioner",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -150,7 +198,7 @@ abi = [
 				"type": "int256"
 			}
 		],
-		"name": "reputate2",
+		"name": "reputateRespondent",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -165,50 +213,6 @@ abi = [
 			}
 		],
 		"name": "sellerStop",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_numItems",
-				"type": "uint256"
-			}
-		],
-		"name": "setFinish",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_name",
-				"type": "string"
-			},
-			{
-				"name": "_description",
-				"type": "string"
-			},
-			{
-				"name": "_reward",
-				"type": "uint256"
-			},
-			{
-				"name": "_googleDocID",
-				"type": "string"
-			},
-			{
-				"name": "_ipfsHash",
-				"type": "string"
-			}
-		],
-		"name": "setRequest",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -265,12 +269,35 @@ abi = [
 				"type": "bool"
 			},
 			{
-				"name": "numOrder",
+				"name": "numQuestion",
 				"type": "int256"
 			},
 			{
-				"name": "numreceive",
+				"name": "numAnswer",
 				"type": "int256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "answer",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"payable": false,
@@ -326,7 +353,7 @@ abi = [
 				"type": "uint256"
 			}
 		],
-		"name": "orderRequest",
+		"name": "question",
 		"outputs": [
 			{
 				"name": "",
@@ -342,18 +369,81 @@ abi = [
 		"inputs": [
 			{
 				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "questionInfos1",
+		"outputs": [
+			{
+				"name": "questionerAddr",
 				"type": "address"
 			},
+			{
+				"name": "respondentAddr",
+				"type": "address"
+			},
+			{
+				"name": "questioner",
+				"type": "string"
+			},
+			{
+				"name": "respondent",
+				"type": "string"
+			},
+			{
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"name": "description",
+				"type": "string"
+			},
+			{
+				"name": "comment",
+				"type": "string"
+			},
+			{
+				"name": "reward",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
 			{
 				"name": "",
 				"type": "uint256"
 			}
 		],
-		"name": "receiveRequest",
+		"name": "questionInfos2",
 		"outputs": [
 			{
-				"name": "",
-				"type": "uint256"
+				"name": "provRegistration",
+				"type": "bool"
+			},
+			{
+				"name": "answered",
+				"type": "bool"
+			},
+			{
+				"name": "checked",
+				"type": "bool"
+			},
+			{
+				"name": "questionerReputation",
+				"type": "bool"
+			},
+			{
+				"name": "respondentReputation",
+				"type": "bool"
+			},
+			{
+				"name": "stopQuestion",
+				"type": "bool"
 			}
 		],
 		"payable": false,
@@ -372,69 +462,6 @@ abi = [
 		"outputs": [
 			{
 				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "requestInfos",
-		"outputs": [
-			{
-				"name": "orderAddr",
-				"type": "address"
-			},
-			{
-				"name": "receiveAddr",
-				"type": "address"
-			},
-			{
-				"name": "client",
-				"type": "string"
-			},
-			{
-				"name": "name",
-				"type": "string"
-			},
-			{
-				"name": "description",
-				"type": "string"
-			},
-			{
-				"name": "reward",
-				"type": "uint256"
-			},
-			{
-				"name": "receiveFinish",
-				"type": "bool"
-			},
-			{
-				"name": "actFinish",
-				"type": "bool"
-			},
-			{
-				"name": "clientFinish",
-				"type": "bool"
-			},
-			{
-				"name": "clientReputate",
-				"type": "bool"
-			},
-			{
-				"name": "receiverReputate",
-				"type": "bool"
-			},
-			{
-				"name": "stopOrder",
 				"type": "bool"
 			}
 		],
