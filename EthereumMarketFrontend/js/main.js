@@ -45,7 +45,7 @@ contract.methods
           var description = document.createElement("div"); // 商品説明を表示する
           var state = document.createElement("div"); // 取引の状態を表示する
           var button = document.createElement("div"); // 取引を進めるボタンを表示する
-          var input = document.createElement("div"); //実験用回答テキストボックスを表示する
+         
 
 
           // IDを指定する
@@ -53,7 +53,7 @@ contract.methods
           description.id = "description" + idx;
           state.id = "state" + idx;
           button.id = "button" + idx;
-          input.id = "input" + idx;
+          
 
           // 画像のみセンター揃え
           image.style.textAlign = "center";
@@ -70,9 +70,10 @@ contract.methods
           }
           //実験用/質問の回答をコメントできるテキストボックスを作成
          var p = document.createElement("p");
+          p.textContent = "質問の回答を記入してください";
           var input = document.createElement("input");
           input.setAttribute('type', 'text');
-          p.appendChild(input);
+          button.appendChild(input);
 
           // 評価を選択するセレクトフォームを作成する
           var p = document.createElement("p");
@@ -163,6 +164,7 @@ function showDescription(idx) {
     "質問者",
     "質問者のアドレス",
     "回答者のアドレス",
+    "回答"
   ];
   itemIdxList = [3, 5, 4, 11, 2, 0, 1, 12]; // keyに対応するインデックス
 
