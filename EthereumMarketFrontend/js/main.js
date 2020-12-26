@@ -204,10 +204,9 @@ function showDescription(idx) {
         elem.textContent = itemKeyList[i] + " : 募集終了";
       } else {
         elem.textContent = itemKeyList[i] + " : 募集中";
-      }
-    });
-    */
-}
+      } */
+    );
+   
 
 // 取引の状態を表示する
 function showState(idx) {
