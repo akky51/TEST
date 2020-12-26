@@ -18,7 +18,7 @@ web3js.eth.getAccounts(function(err, accounts) {
 
 // スマートコントラクトのアドレスを指定する
 // ご自身がデプロイしたスマートコントラクトのアドレスに変更してください。
-const address = "0x004b852f9d3185104c5e4708ca9916448cc4c3c1";
+const address = "0x094a85d07d6aa0c2cffb512a59a0037291a799d4";
 
 // スマートコントラクトのインスタンスを生成する
 contract = new web3js.eth.Contract(abi, address);
