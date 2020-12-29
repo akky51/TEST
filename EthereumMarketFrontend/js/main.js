@@ -194,7 +194,7 @@ function showDescription(idx) {
         document.getElementById("description" + idx).appendChild(elem);
       }
     },
-    /*編集中
+    
     contract.methods
     .questionInfos2(idx)
     .call()
@@ -204,8 +204,8 @@ function showDescription(idx) {
         elem.textContent = itemKeyList[i] + " : 募集終了";
       } else {
         elem.textContent = itemKeyList[i] + " : 募集中";
-      } */
-    );
+      }
+    }
    
 
 // 取引の状態を表示する
@@ -214,12 +214,12 @@ function showState(idx) {
   stateIdxList = [0, 1, 2, 3, 4]; // keyに対応するインデックス
 
   contract.methods
-    .questionInfos1(idx)
+    .questionInfos2(idx)
     .call()
-    .then(function (questionInfos1) {
+    .then(function (questionInfos2) {
       for (var i = 0; i < stateIdxList.length; i++) {
         var elem = document.createElement("p");
-        if (questionInfos1[stateIdxList[i]] == true) {
+        if (questionInfos2[stateIdxList[i]] == true) {
           elem.textContent = stateKeyList[i] + " : 完了";
         } else {
           elem.textContent = stateKeyList[i] + " : 未完了";
