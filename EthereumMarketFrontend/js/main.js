@@ -45,7 +45,7 @@ contract.methods
           var description = document.createElement("div"); // 商品説明を表示する
           var state = document.createElement("div"); // 取引の状態を表示する
           var button = document.createElement("div"); // 取引を進めるボタンを表示する
-         
+          var input = document.createElement("div");
 
 
           // IDを指定する
@@ -107,6 +107,7 @@ contract.methods
           cell.appendChild(image);
           cell.appendChild(description);
           cell.appendChild(state);
+          cell.appendChild(input);
           cell.appendChild(button);
 
           idx++; // 商品番号の更新
