@@ -288,4 +288,3 @@ function respondentReputation(idx) {
 
   return contract.methods.respondentReputation(idx, sellerValue).send({ from: coinbase });
 }
-}
