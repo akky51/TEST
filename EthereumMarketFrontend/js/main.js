@@ -177,7 +177,7 @@ function showDescription(idx) {
   itemIdxList = [4, 5, 7, 2, 0, 5, 3, 1, 6]; // keyに対応するインデックス
 
   contract.methods
-    .questionInfos1(idx).questionInfos2(idx)
+    .questionInfos1(idx)
     .call()
     .then(function (questionInfos1) {
       //依頼番号表示
@@ -185,18 +185,39 @@ function showDescription(idx) {
       elem.textContent = " 質問番号: " + (idx + 1);
       document.getElementById("description" + idx).appendChild(elem);
       
-      for (var i = 0; i < itemIdxList.length; i++) {
+      for (var i = 0; i < 5; i++) {
+        var elem = document.createElement("p");
+         //その他の表示
+            elem.textContent = itemKeyList[i] + " : " + questionInfos1[itemIdxList[i]];
+       
+        document.getElementById("description" + idx).appendChild(elem);
+      }
+    }),
+    //質問状況の表示
+    contract.methods
+    .questionInfos2(idx)
+    .call()
+    .then(function (questionInfos2) {
+      elem.textContent = itemKeyList[5] + " : " + questionInfos2[itemIdxList[5]];
+    }),
+
+    contract.methods
+    .questionInfos1(idx)
+    .call()
+    .then(function (questionInfos1) {
+      //依頼番号表示
+      var elem = document.createElement("p");
+      document.getElementById("description" + idx).appendChild(elem);
+      
+      for (var i = 6; i < itemIdxList.length; i++) {
         var elem = document.createElement("p");
         //回答の表示
         if (i == 8) {
           if (questionInfos1[itemIdxList[i]] == "") {
             elem.textContent = itemKeyList[i] + " : 未回答";
           } else {
-            elem.textContent = itemKeyList[i] + " : "　+/*ここにテキストボックスの値を追加*/0;
+            elem.textContent = itemKeyList[i] + " : "　+ questionInfos1[itemIdxList[i]];
           }
-          //依頼情報の表示
-        } else if (i == 5) {
-           elem.textContent = itemKeyList[i] + " : " + questionInfos2[itemIdxList[i]];
         } //その他の表示
         else {
           elem.textContent =
@@ -266,8 +287,8 @@ function provRegistration(idx) {
 
 // 質問に回答する関数
 function answered(idx) {
-  var buyerValue = document.getElementById("comment" + idx).comment;
-  return contract.methods.answered(idx, comment).send({ from: coinbase });
+  var buyerValue = document.getElementById("input" + idx).input;
+  return contract.methods.answered(idx, input).send({ from: coinbase });
 }
 
 // 回答を確認する関数
