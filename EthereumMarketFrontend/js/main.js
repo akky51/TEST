@@ -198,6 +198,7 @@ function showDescription(idx) {
     .questionInfos2(idx)
     .call()
     .then(function (questionInfos2) {
+      var elem = document.createElement("p");
       elem.textContent = itemKeyList[5] + " : " + questionInfos2[itemIdxList[5]];
     }),
 
@@ -239,7 +240,7 @@ function showState(idx) {
         contract.methods
           .questionInfos2(idx)
           .call()
-          .then(function (questionInfos1) {
+          .then(function (questionInfos2) {
             for (var i = 0; i < stateIdxList.length; i++) {
               var elem = document.createElement("p");
               if (questionInfos2[stateIdxList[i]] == true) {
