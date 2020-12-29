@@ -282,13 +282,13 @@ function setButton(idx) {
 
 // 質問の回答を請負を行う関数
 function provRegistration(idx) {
-  return contract.methods.provRegistration(idx).send({ from: coinbase });
+  return contract.methods.provRegister(idx).send({ from: coinbase });
 }
 
 // 質問に回答する関数
 function answered(idx) {
   var buyerValue = document.getElementById("input" + idx).input;
-  return contract.methods.answered(idx, input).send({ from: coinbase });
+  return contract.methods.answer(idx, input).send({ from: coinbase });
 }
 
 // 回答を確認する関数
@@ -302,11 +302,11 @@ function checked(idx, reward) {
 function questionerReputation(idx) {
   var buyerValue = document.getElementById("value" + idx).value;
 
-  return contract.methods.questionerReputation(idx, buyerValue).send({ from: coinbase });
+  return contract.methods.reputateQuestioner(idx, buyerValue).send({ from: coinbase });
 }
 
 // 回答者を評価する関数
-function respondentReputation(idx) {
+function reputateRespondent(idx) {
   var sellerValue = document.getElementById("value" + idx).value;
 
   return contract.methods.respondentReputation(idx, sellerValue).send({ from: coinbase });
