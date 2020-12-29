@@ -193,7 +193,7 @@ function showDescription(idx) {
         }
         document.getElementById("description" + idx).appendChild(elem);
       }
-    },
+    }),
     
     contract.methods
     .questionInfos2(idx)
@@ -205,7 +205,8 @@ function showDescription(idx) {
       } else {
         elem.textContent = itemKeyList[i] + " : 募集中";
       }
-    }
+    })
+  }
    
 
 // 取引の状態を表示する
