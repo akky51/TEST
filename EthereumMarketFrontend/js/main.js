@@ -74,7 +74,7 @@ contract.methods
          ipt.setAttribute("class", "input-group");
          var label = document.createElement("label");
          label.textContent = "回答を入力してください";
-         labal.setAttribute("for", "value" + idx);
+         label.setAttribute("for", "value" + idx);
           ipt.appendChild(input);
           p.appendChild(ipt);
           button.appendChild(p);
