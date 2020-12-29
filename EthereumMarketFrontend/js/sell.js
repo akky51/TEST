@@ -11,5 +11,5 @@ function sell() {
     var IPFSHash = "";
 
     // コントラクトの呼び出し
-    return contract.methods.setRequest(itemName, description, reward, googleDocID, IPFSHash).send({ from: coinbase });
+    return contract.methods.question(itemName, description, reward, googleDocID, IPFSHash).send({ from: coinbase });
 }
