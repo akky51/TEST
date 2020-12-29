@@ -199,6 +199,7 @@ function showDescription(idx) {
     .questionInfos2(idx)
     .call()
     .then(function (questionInfos2) {
+    var elem = document.createElement("p");
     // 依頼状況のみ，true⇒募集中止，false⇒募集中に表示を変更する
     if (questionInfos2[5] == true) {
         elem.textContent = itemKeyList[i] + " : 募集終了";
