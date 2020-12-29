@@ -70,15 +70,14 @@ contract.methods
           }
           //実験用/質問の回答をコメントできるテキストボックスを作成
          var p = document.createElement("p");
-         var form = document.createElement("div");
-         form.setAttribute("class", "input-group");
+         var ipt = document.createElement("input");
+         ipt.setAttribute("class", "input-group");
          var label = document.createElement("label");
          label.textContent = "質問に対する回答を入力してください";
           var input = document.createElement("input");
-          input.setAttribute('type', 'text');
-          form.appendChild(label);
-          form.appendChild(input);
-          p.appendChild(form);
+          ipt.appendChild(label);
+          ipt.appendChild(input);
+          p.appendChild(ipt);
           button.appendChild(p);
 
           // 評価を選択するセレクトフォームを作成する
