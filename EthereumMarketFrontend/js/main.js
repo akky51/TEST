@@ -53,7 +53,7 @@ contract.methods
           description.id = "description" + idx;
           state.id = "state" + idx;
           button.id = "button" + idx;
-          
+          input.id = "input" + idx;
 
           // 画像のみセンター揃え
           image.style.textAlign = "center";
@@ -71,11 +71,11 @@ contract.methods
           //実験用/質問の回答をコメントできるテキストボックスを作成
          var p = document.createElement("p");
          var form = document.createElement("div");
+         form.setAttribute("class", "input-group");
          var label = document.createElement("label");
          label.textContent = "質問に対する回答を入力してください";
           var input = document.createElement("input");
           input.setAttribute('type', 'text');
-          input.id = "input" + idx;
           form.appendChild(label);
           form.appendChild(input);
           p.appendChild(form);
@@ -108,7 +108,6 @@ contract.methods
           cell.appendChild(description);
           cell.appendChild(state);
           cell.appendChild(button);
-          cell.appendChild(input);
 
           idx++; // 商品番号の更新
         }
