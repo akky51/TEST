@@ -72,10 +72,8 @@ contract.methods
          var p = document.createElement("p");
          var ipt = document.createElement("input");
          ipt.setAttribute("class", "input-group");
-         var label = document.createElement("label");
-         label.textContent = "質問に対する回答を入力してください";
+         ipt.textContent = "回答を入力してください";
           var input = document.createElement("input");
-          ipt.appendChild(label);
           ipt.appendChild(input);
           p.appendChild(ipt);
           button.appendChild(p);
