@@ -44,8 +44,8 @@ contract.methods
           var image = document.createElement("div"); // 商品画像を表示する
           var description = document.createElement("div"); // 商品説明を表示する
           var state = document.createElement("div"); // 取引の状態を表示する
-          //var input = document.createElement("div"); // 回答欄を表示する
-          var button = document.createElement("div"); // 取引を進めるボタンを表示する
+          var input = document.createElement("div"); // 回答欄を表示する
+          //var button = document.createElement("div"); // 取引を進めるボタンを表示する
 
           // IDを指定する
           image.id = "image" + idx;
@@ -59,7 +59,15 @@ contract.methods
 
           // 取引を進めるボタンを作成する
           for (k = 0; k < buttonId.length; k++) {
-             if (k == 1) {
+            var p = document.createElement("p");
+            var btn = document.createElement("button");
+            btn.setAttribute("class", "btn btn-default");
+            btn.id = buttonId[k] + idx;
+            btn.textContent = buttonText[k];
+            p.appendChild(btn);
+            button.appendChild(p);
+            //実験用/質問の回答をコメントできるテキストボックスを作成
+            if (k == 1) {
               var p = document.createElement("p");
               var form = document.createElement("div");
               form.setAttribute("class", "form-group");
@@ -74,17 +82,8 @@ contract.methods
               form.appendChild(label);
               form.appendChild(ipt);
               p.appendChild(form);
-              button.appendChild(p);
+              input.appendChild(p);
             }
-            var p = document.createElement("p");
-            var btn = document.createElement("button");
-            btn.setAttribute("class", "btn btn-default");
-            btn.id = buttonId[k] + idx;
-            btn.textContent = buttonText[k];
-            p.appendChild(btn);
-            button.appendChild(p);
-            //実験用/質問の回答をコメントできるテキストボックスを作成
-           
           }
           //実験用/質問の回答をコメントできるテキストボックスを作成
           /*var p = document.createElement("p");
@@ -125,7 +124,7 @@ contract.methods
           cell.appendChild(image);
           cell.appendChild(description);
           cell.appendChild(state);
-          //cell.appendChild(input);
+          cell.appendChild(input);
           cell.appendChild(button);
 
           idx++; // 商品番号の更新
@@ -305,8 +304,8 @@ function provRegistration(idx) {
 
 // 質問に回答する関数
 function answered(idx) {
-  var input_message = document.getElementById("input" + idx).value;
-  return contract.methods.answer(idx, input_message).send({ from: coinbase });
+  var inputMessage = document.getElementById("input" + idx).value;
+  return contract.methods.answer(idx, inputMessage).send({ from: coinbase });
 }
 
 // 回答を確認する関数
