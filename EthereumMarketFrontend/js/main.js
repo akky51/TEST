@@ -69,10 +69,23 @@ contract.methods
             button.appendChild(p);
           }
           //実験用/質問の回答をコメントできるテキストボックスを作成
-         var p = document.createElement("p");
+         /*var p = document.createElement("p");
          var ipt = document.createElement("input");
          ipt.setAttribute("class", "input-group");
           var label = document.createElement("label");
+         label.textContent = "回答を入力してください";
+         label.setAttribute("for", "value" + idx);
+          p.appendChild(label);
+         ipt.appendChild(input);
+          p.appendChild(ipt);
+          button.appendChild(p);*/
+           var p = document.createElement("p");
+         var ipt = document.createElement("input");
+         ipt.setAttribute("class", "input-group");
+         ipt.setAttribute("type", "text");
+         ipt.id = "input" + idx;
+         var label = document.createElement("label");
+
          label.textContent = "回答を入力してください";
          label.setAttribute("for", "value" + idx);
           p.appendChild(label);
@@ -259,7 +272,7 @@ function setButton(idx) {
     .questionInfos1(idx)
     .call()
     .then(function (questionInfos1) {
-      reward = questionInfos1[5]; // 商品価格を取得する
+      reward = questionInfos1[7]; // 商品価格を取得する
     })
     .then(function () {
       document
