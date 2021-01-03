@@ -83,8 +83,7 @@ contract.methods
          form.setAttribute("class", "form-group");
          var ipt = document.createElement("input");
          ipt.setAttribute("class", "input-group");
-         ipt.setAttribute("type", "text");
-           ipt.setAttribute("value", "回答を入力");
+         ipt.setAttribute("value", "");
          ipt.id = "input" + idx;
          var label = document.createElement("label");
 
