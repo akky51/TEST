@@ -77,7 +77,10 @@ contract.methods
          ipt.appendChild(input);
           p.appendChild(ipt);
           button.appendChild(p);*/
-           var p = document.createElement("p");
+            //実験用/質問の回答をコメントできるテキストボックスを作成
+         var p = document.createElement("p");
+         var form = document.createElement("div");
+         form.setAttribute("class", "form-group");
          var ipt = document.createElement("input");
          ipt.setAttribute("class", "input-group");
          ipt.setAttribute("type", "text");
@@ -86,8 +89,9 @@ contract.methods
 
          label.textContent = "回答を入力してください";
          label.setAttribute("for", "value" + idx);
-          p.appendChild(label);
-          p.appendChild(ipt);
+          form.appendChild(label);         
+          form.appendChild(ipt);
+          p.appendChild(form);
           button.appendChild(p);
 
           // 評価を選択するセレクトフォームを作成する
