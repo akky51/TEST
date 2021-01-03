@@ -59,15 +59,7 @@ contract.methods
 
           // 取引を進めるボタンを作成する
           for (k = 0; k < buttonId.length; k++) {
-            var p = document.createElement("p");
-            var btn = document.createElement("button");
-            btn.setAttribute("class", "btn btn-default");
-            btn.id = buttonId[k] + idx;
-            btn.textContent = buttonText[k];
-            p.appendChild(btn);
-            button.appendChild(p);
-            //実験用/質問の回答をコメントできるテキストボックスを作成
-            if (k == 1) {
+             if (k == 1) {
               var p = document.createElement("p");
               var form = document.createElement("div");
               form.setAttribute("class", "form-group");
@@ -84,6 +76,15 @@ contract.methods
               p.appendChild(form);
               button.appendChild(p);
             }
+            var p = document.createElement("p");
+            var btn = document.createElement("button");
+            btn.setAttribute("class", "btn btn-default");
+            btn.id = buttonId[k] + idx;
+            btn.textContent = buttonText[k];
+            p.appendChild(btn);
+            button.appendChild(p);
+            //実験用/質問の回答をコメントできるテキストボックスを作成
+           
           }
           //実験用/質問の回答をコメントできるテキストボックスを作成
           /*var p = document.createElement("p");
