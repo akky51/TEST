@@ -87,7 +87,6 @@ contract.methods
          label.textContent = "回答を入力してください";
          label.setAttribute("for", "value" + idx);
           p.appendChild(label);
-         ipt.appendChild(input);
           p.appendChild(ipt);
           button.appendChild(p);
 
