@@ -82,7 +82,7 @@ contract.methods
               form.appendChild(label);
               form.appendChild(ipt);
               p.appendChild(form);
-              input.appendChild(p);
+              button.appendChild(p);
             }
           }
           //実験用/質問の回答をコメントできるテキストボックスを作成
