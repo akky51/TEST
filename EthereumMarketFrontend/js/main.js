@@ -84,7 +84,7 @@ contract.methods
          var ipt = document.createElement("input");
          ipt.setAttribute("class", "input-group");
          ipt.setAttribute("type", "text");
-           ipt.setAttribute("value", " ");
+           ipt.setAttribute("value", "回答を入力");
          ipt.id = "input" + idx;
          var label = document.createElement("label");
 
