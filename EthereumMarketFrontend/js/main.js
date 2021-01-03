@@ -44,7 +44,7 @@ contract.methods
           var image = document.createElement("div"); // 商品画像を表示する
           var description = document.createElement("div"); // 商品説明を表示する
           var state = document.createElement("div"); // 取引の状態を表示する
-          var input = document.createElement("div"); // 回答欄を表示する
+          //var input = document.createElement("div"); // 回答欄を表示する
           var button = document.createElement("div"); // 取引を進めるボタンを表示する
 
           // IDを指定する
