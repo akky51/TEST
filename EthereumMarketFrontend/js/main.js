@@ -45,13 +45,14 @@ contract.methods
           var description = document.createElement("div"); // 商品説明を表示する
           var state = document.createElement("div"); // 取引の状態を表示する
           var button = document.createElement("div"); // 取引を進めるボタンを表示する
+          var input = document.createElement("div"); // 取引を進めるボタンを表示する
 
           // IDを指定する
           image.id = "image" + idx;
           description.id = "description" + idx;
           state.id = "state" + idx;
           button.id = "button" + idx;
-          
+          input.id = "input" + idx;
 
           // 画像のみセンター揃え
           image.style.textAlign = "center";
@@ -92,7 +93,7 @@ contract.methods
           form.appendChild(label);         
           form.appendChild(ipt);
           p.appendChild(form);
-          button.appendChild(p);
+          input.appendChild(p);
 
           // 評価を選択するセレクトフォームを作成する
           var p = document.createElement("p");
@@ -121,6 +122,7 @@ contract.methods
           cell.appendChild(description);
           cell.appendChild(state);
           cell.appendChild(button);
+          cell.appendChild(input);
 
           idx++; // 商品番号の更新
         }
