@@ -84,7 +84,7 @@ contract.methods
          var ipt = document.createElement("input");
          ipt.setAttribute("class", "input-group");
          ipt.setAttribute("type", "text");
-           ipt.setAttribute("value", "");
+           ipt.setAttribute("value", " ");
          ipt.id = "input" + idx;
          var label = document.createElement("label");
 
