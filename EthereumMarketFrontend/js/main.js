@@ -45,15 +45,13 @@ contract.methods
           var description = document.createElement("div"); // 商品説明を表示する
           var state = document.createElement("div"); // 取引の状態を表示する
           var button = document.createElement("div"); // 取引を進めるボタンを表示する
-          var input = document.createElement("div");
-
 
           // IDを指定する
           image.id = "image" + idx;
           description.id = "description" + idx;
           state.id = "state" + idx;
           button.id = "button" + idx;
-          input.id = "input" + idx;
+          
 
           // 画像のみセンター揃え
           image.style.textAlign = "center";
