@@ -287,8 +287,8 @@ function provRegistration(idx) {
 
 // 質問に回答する関数
 function answered(idx) {
-  var comment = document.getElementById("input" + idx).input;
-  return contract.methods.answer(idx, comment).send({ from: coinbase });
+  var input_message = document.getElementById("input" + idx).value;
+  return contract.methods.answered(idx, input_message).send({ from: coinbase });
 }
 
 // 回答を確認する関数
