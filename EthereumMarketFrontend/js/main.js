@@ -83,7 +83,8 @@ contract.methods
          var p = document.createElement("p");
          var form = document.createElement("div");
          form.setAttribute("class", "form-group");
-         var ipt = document.createElement("text");
+         var ipt = document.createElement("input");
+         ipt.setAttribute("type", "text");
          ipt.setAttribute("class", "input-group");
          ipt.setAttribute("value", "");
          ipt.id = "input" + idx;
