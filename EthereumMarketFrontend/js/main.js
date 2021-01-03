@@ -45,15 +45,14 @@ contract.methods
           var description = document.createElement("div"); // 商品説明を表示する
           var state = document.createElement("div"); // 取引の状態を表示する
           var input = document.createElement("div"); // 回答欄を表示する
-          var button = document.createElement("div"); // 取引を進めるボタンを表示する
-          
+          //var button = document.createElement("div"); // 取引を進めるボタンを表示する
 
           // IDを指定する
           image.id = "image" + idx;
           description.id = "description" + idx;
           state.id = "state" + idx;
           button.id = "button" + idx;
-          input.id = "input" + idx;
+          //input.id = "input" + idx;
 
           // 画像のみセンター揃え
           image.style.textAlign = "center";
@@ -67,9 +66,27 @@ contract.methods
             btn.textContent = buttonText[k];
             p.appendChild(btn);
             button.appendChild(p);
+            //実験用/質問の回答をコメントできるテキストボックスを作成
+            if (k == 1) {
+              var p = document.createElement("p");
+              var form = document.createElement("div");
+              form.setAttribute("class", "form-group");
+              var ipt = document.createElement("input");
+              ipt.setAttribute("type", "text");
+              ipt.setAttribute("class", "form-control");
+              ipt.id = "input" + idx;
+              ipt.setAttribute("placeholder", "回答を入力");
+              var label = document.createElement("label");
+              label.textContent = "回答を入力してください";
+              label.setAttribute("for", "value" + idx);
+              form.appendChild(label);
+              form.appendChild(ipt);
+              p.appendChild(form);
+              input.appendChild(p);
+            }
           }
           //実験用/質問の回答をコメントできるテキストボックスを作成
-         /*var p = document.createElement("p");
+          /*var p = document.createElement("p");
          var ipt = document.createElement("input");
          ipt.setAttribute("class", "input-group");
           var label = document.createElement("label");
@@ -79,23 +96,7 @@ contract.methods
          ipt.appendChild(input);
           p.appendChild(ipt);
           button.appendChild(p);*/
-            //実験用/質問の回答をコメントできるテキストボックスを作成
-         var p = document.createElement("p");
-         var form = document.createElement("div");
-         form.setAttribute("class", "form-group");
-         var ipt = document.createElement("input");
-         ipt.setAttribute("type", "text");
-         ipt.setAttribute("class", "input-group");
-         ipt.setAttribute("value", "");
-         ipt.id = "input" + idx;
-         var label = document.createElement("label");
-
-         label.textContent = "回答を入力してください";
-         label.setAttribute("for", "value" + idx);
-          form.appendChild(label);         
-          form.appendChild(ipt);
-          p.appendChild(form);
-          input.appendChild(p);
+          
 
           // 評価を選択するセレクトフォームを作成する
           var p = document.createElement("p");
@@ -125,7 +126,6 @@ contract.methods
           cell.appendChild(state);
           cell.appendChild(input);
           cell.appendChild(button);
-         
 
           idx++; // 商品番号の更新
         }
@@ -188,8 +188,7 @@ function showDescription(idx) {
     "状況",
     "回答者",
     "回答者のアドレス",
-    "回答"
-    
+    "回答",
   ];
   itemIdxList = [4, 5, 7, 2, 0, 5, 3, 1, 6]; // keyに対応するインデックス
 
@@ -201,74 +200,74 @@ function showDescription(idx) {
       var elem = document.createElement("p");
       elem.textContent = " 質問番号: " + (idx + 1);
       document.getElementById("description" + idx).appendChild(elem);
-      
+
       for (var i = 0; i < 5; i++) {
         var elem = document.createElement("p");
-         //その他の表示
-            elem.textContent = itemKeyList[i] + " : " + questionInfos1[itemIdxList[i]];
-       
+        //その他の表示
+        elem.textContent =
+          itemKeyList[i] + " : " + questionInfos1[itemIdxList[i]];
+
         document.getElementById("description" + idx).appendChild(elem);
       }
     }),
     //質問状況の表示
     contract.methods
-    .questionInfos2(idx)
-    .call()
-    .then(function (questionInfos2) {
-      var elem = document.createElement("p");
-      elem.textContent = itemKeyList[5] + " : " + questionInfos2[itemIdxList[5]];
-    }),
-
-    contract.methods
-    .questionInfos1(idx)
-    .call()
-    .then(function (questionInfos1) {
-      //依頼番号表示
-      var elem = document.createElement("p");
-      document.getElementById("description" + idx).appendChild(elem);
-      
-      for (var i = 6; i < itemIdxList.length; i++) {
+      .questionInfos2(idx)
+      .call()
+      .then(function (questionInfos2) {
         var elem = document.createElement("p");
-        //回答の表示
-        if (i == 8) {
-          if (questionInfos1[itemIdxList[i]] == "") {
-            elem.textContent = itemKeyList[i] + " : 未回答";
-          } else {
-            elem.textContent = itemKeyList[i] + " : "　+ questionInfos1[itemIdxList[i]];
-          }
-        } //その他の表示
-        else {
-          elem.textContent =
-            itemKeyList[i] + " : " + questionInfos1[itemIdxList[i]];
-        }
-        
+        elem.textContent =
+          itemKeyList[5] + " : " + questionInfos2[itemIdxList[5]];
+      }),
+    contract.methods
+      .questionInfos1(idx)
+      .call()
+      .then(function (questionInfos1) {
+        //依頼番号表示
+        var elem = document.createElement("p");
         document.getElementById("description" + idx).appendChild(elem);
-      }
-    })
-    
-}
 
+        for (var i = 6; i < itemIdxList.length; i++) {
+          var elem = document.createElement("p");
+          //回答の表示
+          if (i == 8) {
+            if (questionInfos1[itemIdxList[i]] == "") {
+              elem.textContent = itemKeyList[i] + " : 未回答";
+            } else {
+              elem.textContent =
+                itemKeyList[i] + " : " + questionInfos1[itemIdxList[i]];
+            }
+          } //その他の表示
+          else {
+            elem.textContent =
+              itemKeyList[i] + " : " + questionInfos1[itemIdxList[i]];
+          }
+
+          document.getElementById("description" + idx).appendChild(elem);
+        }
+      });
+}
 
 // 取引の状態を表示する
 function showState(idx) {
-        stateKeyList = ["請負", "回答", "確認（送金）", "質問者評価", "回答者評価"];
-        stateIdxList = [0, 1, 2, 3, 4]; // keyに対応するインデックス
+  stateKeyList = ["請負", "回答", "確認（送金）", "質問者評価", "回答者評価"];
+  stateIdxList = [0, 1, 2, 3, 4]; // keyに対応するインデックス
 
-        contract.methods
-          .questionInfos2(idx)
-          .call()
-          .then(function (questionInfos2) {
-            for (var i = 0; i < stateIdxList.length; i++) {
-              var elem = document.createElement("p");
-              if (questionInfos2[stateIdxList[i]] == true) {
-                elem.textContent = stateKeyList[i] + " : 完了";
-              } else {
-                elem.textContent = stateKeyList[i] + " : 未完了";
-              }
-              document.getElementById("state" + idx).appendChild(elem);
-            }
-          });
+  contract.methods
+    .questionInfos2(idx)
+    .call()
+    .then(function (questionInfos2) {
+      for (var i = 0; i < stateIdxList.length; i++) {
+        var elem = document.createElement("p");
+        if (questionInfos2[stateIdxList[i]] == true) {
+          elem.textContent = stateKeyList[i] + " : 完了";
+        } else {
+          elem.textContent = stateKeyList[i] + " : 未完了";
+        }
+        document.getElementById("state" + idx).appendChild(elem);
       }
+    });
+}
 
 // 取引を進めるボタンに関数を登録する
 function setButton(idx) {
@@ -311,21 +310,23 @@ function answered(idx) {
 
 // 回答を確認する関数
 function checked(idx, reward) {
-  return contract.methods
-    .checked(idx)
-    .send({ from: coinbase, value: reward });
+  return contract.methods.checked(idx).send({ from: coinbase, value: reward });
 }
 
 // 質問者を評価する関数
 function questionerReputation(idx) {
   var buyerValue = document.getElementById("value" + idx).value;
 
-  return contract.methods.reputateQuestioner(idx, buyerValue).send({ from: coinbase });
+  return contract.methods
+    .reputateQuestioner(idx, buyerValue)
+    .send({ from: coinbase });
 }
 
 // 回答者を評価する関数
 function reputateRespondent(idx) {
   var sellerValue = document.getElementById("value" + idx).value;
 
-  return contract.methods.respondentReputation(idx, sellerValue).send({ from: coinbase });
+  return contract.methods
+    .respondentReputation(idx, sellerValue)
+    .send({ from: coinbase });
 }
