@@ -305,7 +305,7 @@ function provRegistration(idx) {
 }
 
 // 質問に回答する関数
-function answered(idx, inputMessage) {
+function answer(idx, inputMessage) {
   
   return contract.methods.answer(idx, inputMessage).send({ from: coinbase });
 }
