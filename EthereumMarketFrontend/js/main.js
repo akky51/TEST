@@ -19,7 +19,7 @@ contract.methods
     // 取引を進めるボタンのIDとボタンに表示するテキスト
     var buttonId = [
       "provRegistration",
-      "answered",
+      "answer",
       "checked",
       "questionerReputation",
       "respondentReputation",
@@ -273,6 +273,7 @@ function showState(idx) {
 // 取引を進めるボタンに関数を登録する
 function setButton(idx) {
   var reward;
+  var inputMessage = document.getElementById("input" + idx).value;
   contract.methods
     .questionInfos1(idx)
     .call()
@@ -284,8 +285,8 @@ function setButton(idx) {
         .getElementById("provRegistration" + idx)
         .setAttribute("onclick", "provRegistration(" + idx + ");");
       document
-        .getElementById("answered" + idx)
-        .setAttribute("onclick", "answered(" + idx + ");");
+        .getElementById("answer" + idx)
+        .setAttribute("onclick", "answer(" + idx + "," + inputMessage + ");");
       document
         .getElementById("checked" + idx)
         .setAttribute("onclick", "checked(" + idx + "," + reward + ");");
@@ -304,8 +305,8 @@ function provRegistration(idx) {
 }
 
 // 質問に回答する関数
-function answered(idx) {
-  var inputMessage = document.getElementById("input" + idx).value;
+function answered(idx, inputMessage) {
+  
   return contract.methods.answer(idx, inputMessage).send({ from: coinbase });
 }
 
