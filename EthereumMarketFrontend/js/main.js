@@ -124,7 +124,7 @@ contract.methods
           cell.appendChild(image);
           cell.appendChild(description);
           cell.appendChild(state);
-          cell.appendChild(input);
+          //cell.appendChild(input);
           cell.appendChild(button);
 
           idx++; // 商品番号の更新
