@@ -328,6 +328,6 @@ function reputateRespondent(idx) {
   var sellerValue = document.getElementById("value" + idx).value;
 
   return contract.methods
-    .respondentReputation(idx, sellerValue)
+    .reputateReputation(idx, sellerValue)
     .send({ from: coinbase });
 }
