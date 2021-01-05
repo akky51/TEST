@@ -273,7 +273,6 @@ function showState(idx) {
 // 取引を進めるボタンに関数を登録する
 function setButton(idx) {
   var reward;
-  var inputMessage = document.getElementById("input" + idx).value;
   contract.methods
     .questionInfos1(idx)
     .call()
@@ -305,8 +304,9 @@ function provRegistration(idx) {
 }
 
 // 質問に回答する関数
-function answer(idx, inputMessage) {
+function answer(idx) {
   
+  var inputMessage = document.getElementById("input" + idx).value;
   return contract.methods.answer(idx, inputMessage).send({ from: coinbase });
 }
 
