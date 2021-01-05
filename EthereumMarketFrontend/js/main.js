@@ -285,7 +285,7 @@ function setButton(idx) {
         .setAttribute("onclick", "provRegistration(" + idx + ");");
       document
         .getElementById("answer" + idx)
-        .setAttribute("onclick", "answer(" + idx + "," + inputMessage + ");");
+        .setAttribute("onclick", "answer(" + idx + ");");
       document
         .getElementById("checked" + idx)
         .setAttribute("onclick", "checked(" + idx + "," + reward + ");");
